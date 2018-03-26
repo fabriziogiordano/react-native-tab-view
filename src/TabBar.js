@@ -10,6 +10,7 @@ import {
   ScrollView,
   Platform,
   I18nManager,
+  SafeAreaView,
 } from 'react-native';
 import TouchableItem from './TouchableItem';
 import { SceneRendererPropType } from './TabViewPropTypes';
@@ -343,7 +344,10 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
     const translateX = Animated.multiply(this.state.scrollAmount, -1);
 
     return (
-      <Animated.View style={[styles.tabBar, this.props.style]}>
+      <SafeAreaView
+	style={[styles.tabBar, this.props.style]}
+	forceInset={{ bottom: 'never', top: 'always' }}
+      >
         <Animated.View
           pointerEvents="none"
           style={[
@@ -490,7 +494,7 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
             })}
           </Animated.ScrollView>
         </View>
-      </Animated.View>
+      </SafeAreaView>
     );
   }
 }
